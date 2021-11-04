@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs')
 const app = express()
 const PORT = 3000
 
-app.engine('hbs', exhbs({ defaultLayout: 'main', exist: 'hbs' }))
+app.engine('hbs', exhbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
