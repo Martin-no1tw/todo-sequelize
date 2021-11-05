@@ -8,6 +8,7 @@ const app = express()
 const PORT = 3000
 
 const db = require('./models')
+const todo = require('./models/todo')
 const Todo = db.Todo
 const User = db.User
 
@@ -21,8 +22,9 @@ app.get('/', (req, res) => {
     raw: true,
     nest: true
   })
-    .then((todos) => { return res.render('index', { todos: todos }) })
+    .then((todos) => { return res.render('index', { todos }) })
     .catch((error) => { return res.status(422).json(error) })
+
 })
 
 app.get('/', (req, res) => {
