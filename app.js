@@ -10,7 +10,7 @@ const routes = require('./routes')
 const app = express()
 const PORT = 3000
 
-
+const flash = require('connect-flash')
 
 app.engine('hbs', exhbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
@@ -24,14 +24,18 @@ app.use(session({
 
 
 usePassport(app)
+app.use(flash())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
+
 
 
 app.use(routes)
